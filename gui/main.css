@@ -51,6 +51,49 @@ body {
 	padding-bottom: 80px;
 }
 
+h3 {
+  font-size: 12px;
+  text-decoration-line: underline;
+  color: #dbd851;
+  margin-top: 10px;
+}
+
+.settings {
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 30%;
+  width: 50%;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  min-height: 60px;
+  /* background-color: #444; */
+  border-radius: 3px;
+  padding: 10px
+}
+
+.use_tabs {
+  margin: 7px;
+  padding: 5px;
+  padding-left: 10px;
+  color: #333;
+  border-radius: 3px;
+  background-color: #dbd851;
+  font-size: 13px;
+  width: 250px;
+  float: left;
+}
+
+.max_symbols {
+  margin: 7px;
+  padding: 5px;
+  color: #333;
+  border-radius: 3px;
+  background-color: #dbd851;
+  font-size: 13px;
+  width: 380px;
+  float: left;
+}
+
 .content {
   font-family: jetBrains mono, Consolas, mono-serif;
   color: #ccc;
@@ -65,7 +108,7 @@ body {
   margin-left: 30%;
   margin-right: 20%;
   min-height: 500px; /* Should be removed. Only for demonstration */
-  margin-top: 0px;
+  margin-top: 10px;
   padding-top: 20px;
   user-select: none;
   z-index: 1;
@@ -103,7 +146,7 @@ body {
 	margin-top: 20px;
 	height: 50px;
 	padding-right: 10px;
-	display: inline-block;
+  border-radius: 3px;
 	float: left;
 }
 
@@ -122,6 +165,7 @@ input[type="file"] {
 
 textarea {
   resize: none;
+  border-radius: 3px;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

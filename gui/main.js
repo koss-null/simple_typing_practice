@@ -1,11 +1,37 @@
 var text_to_type;
 var cur_idx;
-var code_with_spaces = false;
+var code_with_spaces = !(document.getElementById('use_tabs').checked);
 var hits;
+var max_symbols;
 var fails;
 var let_errors = false;
 var startTime;
 var endTime = "lol";
+
+
+function changeUseTabs() {
+	code_with_spaces = !(document.getElementById('use_tabs').checked);
+	if (!code_with_spaces) {
+		document.getElementsByClassName('use_tabs')[0].style.backgroundColor="#dbd851";
+		document.getElementsByClassName('use_tabs')[0].style.color="#333";
+		document.getElementsByName('label_use_tabs')[0].innerHTML="Using tabs instead of spaces";
+		text_to_type = text_to_type.replace(/    /g, "\t");
+		restart();
+	} else {
+		document.getElementsByClassName('use_tabs')[0].style.backgroundColor="#444";
+		document.getElementsByClassName('use_tabs')[0].style.color="#dbd851";
+		document.getElementsByName('label_use_tabs')[0].innerHTML="Using spaces instead of tabs";
+		text_to_type = text_to_type.replace(/\t/g, "    ");
+		restart();
+	}
+}
+
+function changeMaxSymbols() {
+	max_symbols = document.getElementById("max_symbols").value;
+	if (max_symbols <= 0) {
+		max_symbols = text_to_type.length - 1;
+	}
+}
 
 function changeCode() {
 	var fileList = myFile.files;
@@ -24,6 +50,8 @@ function changeCode() {
 			document.getElementsByName('main_window_text')[0].value=reader.result.replace(/    /g, "\t");
 			text_to_type = reader.result.replace(/    /g, "\t");
 		}
+
+		document.getElementById("max_symbols").value = text_to_type.length - 1;
 
 		let linesCnt = reader.result.split(/\r\n|\r|\n/).length;
 		document.getElementsByName('main_window_text')[0].style.minHeight=linesCnt*27+"px";
@@ -47,6 +75,8 @@ function restart() {
 
 // handle tabs in textarea
 $("textarea").keydown(function(e) {
+	changeMaxSymbols()
+
 	if (hits == 0) {
 		startTime = performance.now();
 	}
@@ -74,7 +104,7 @@ $("textarea").keydown(function(e) {
 		} else if (typed === "Shift") {
 			return
 		} else if (typed === "Enter" && text_to_type[cur_idx] == "\n") {
-			if (text_to_type.length - 1 <= cur_idx) {
+			if (max_symbols <= cur_idx) {
 				document.getElementById("score").style.color="#9f6";
 				var start = this.selectionStart;
 				var end = this.selectionEnd;
@@ -147,5 +177,5 @@ $("textarea").keydown(function(e) {
 	if (endTime != "lol") {
 		suffix = `; total time: ${((endTime - startTime)/1000).toFixed(2)}s,\t${(cur_idx / (endTime - startTime) * 1000 * 60).toFixed(2)} char/min`;
 	}
-	document.getElementById("score").innerHTML="score: "+cur_idx+"\\"+(text_to_type.length-1)+";\terrors: "+fails +";\terror rate: " +(fails/hits).toFixed(2)+suffix;
+	document.getElementById("score").innerHTML="score: "+cur_idx+"/"+(max_symbols)+";\terrors: "+fails +";\terror rate: " +(fails/hits).toFixed(2)+suffix;
 });

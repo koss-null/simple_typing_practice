@@ -17,6 +17,17 @@
 	</div>
 
 	<div class="content-holder">
+		<div class="settings">
+			<h3>Settings:</h3>
+			<div class="use_tabs">
+				<input type="checkbox" id="use_tabs" onchange="changeUseTabs()" name="use_tabs" style="display: none;" checked>
+				<label for="use_tabs" name="label_use_tabs">Using tabs instead of spaces</label>
+			</div>
+			<div class="max_symbols">
+				Max symbols (set to <= 0 to off):
+				 <input type="number" step="1" id="max_symbols" onchange="changeMaxSymbols()" style="width: 90px;"/>
+			</div>
+		</div>
 		<form action="none" method="get" align="right">
 			<textarea class="content" name="main_window_text"></textarea>
 		</form>
