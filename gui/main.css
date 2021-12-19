@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+  font-family: jetBrains mono, Consolas, mono-serif;
+}
+
+body {
+  margin: 0;
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  font-family: jetBrains mono, Consolas, mono-serif;
+  background-color: #111;
+  position: fixed;
+  z-index: 999;
+  min-width: 100%;
+}
+
+.topnav {
+  color: #dbd851;
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-decoration: none;
+  margin-right: 40px;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  color: #dbd851;
+  text-decoration: underline;
+}
+
+/* Style the content */
+.content-holder {
+	width: 100%;
+	background-color: #333;
+	padding-top: 60px;
+	padding-bottom: 80px;
+}
+
+.content {
+  font-family: jetBrains mono, Consolas, mono-serif;
+  color: #ccc;
+  font-size: 14pt;
+  background-color: #333;
+  padding: 10px;
+  min-width: 330px;
+  width: 50%;
+  border: 5px solid #99974a;
+  display: flex;
+  text-align: left;
+  margin-left: 30%;
+  margin-right: 20%;
+  min-height: 500px; /* Should be removed. Only for demonstration */
+  margin-top: 0px;
+  padding-top: 20px;
+  user-select: none;
+  z-index: 1;
+  position: relative;
+  display: block;
+  tab-size: 4;
+}
+
+.content-front {
+  font-family: jetBrains mono, Consolas, mono-serif;
+  color: #ccc;
+  font-size: 14pt;
+  background-color: #333;
+  padding: 10px;
+  min-width: 330px;
+  width: 50%;
+  border: 5px solid #99974a;
+  display: flex;
+  text-align: left;
+  margin-left: 30%;
+  margin-right: 20%;
+  min-height: 500px; /* Should be removed. Only for demonstration */
+  margin-top: -500px;
+  padding-top: 20px;
+  user-select: none;
+  z-index: 5;
+  opacity: 80%;
+  position: relative;
+  display: block;
+  tab-size: 4;
+}
+
+.code_selector {
+	background-color: #dbd851;
+	margin-top: 20px;
+	height: 50px;
+	padding-right: 10px;
+	display: inline-block;
+	float: left;
+}
+
+input[type="file"] {
+  background-color: #dbd851;
+  border: none;
+  color: #333;
+  padding-left: 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+textarea {
+  resize: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #7c7c7c;
+  opacity: 1; /* Firefox */
+}
+
+/* Style the footer */
+.footer {
+  background-color: #111;
+  color: #dbd851;
+  text-align: right;
+  padding: 10px;
+  padding-right: 30px;
+}
