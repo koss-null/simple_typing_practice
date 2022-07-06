@@ -27,9 +27,13 @@ function changeUseTabs() {
 }
 
 function changeMaxSymbols() {
+	ms_old = max_symbols
 	max_symbols = document.getElementById("max_symbols").value;
 	if (max_symbols <= 0) {
 		max_symbols = text_to_type.length - 1;
+	}
+	if (ms_old != max_symbols) {
+		restart()
 	}
 }
 
@@ -71,6 +75,8 @@ function restart() {
 	endTime = 'lol';
 	cur_idx = 0;
 	document.getElementsByName('main_window_input')[0].value="";
+	document.getElementsByClassName('content-front')[0].style.borderBlockColor = '#99974a';
+	document.getElementsByClassName('content-front')[0].style.background = '#333';
 }
 
 // handle tabs in textarea
@@ -106,6 +112,8 @@ $("textarea").keydown(function(e) {
 		} else if (typed === "Enter" && text_to_type[cur_idx] == "\n") {
 			if (max_symbols <= cur_idx) {
 				document.getElementById("score").style.color="#9f6";
+				document.getElementsByClassName('content-front')[0].style.borderBlockColor = '#49904e';
+				document.getElementsByClassName('content-front')[0].style.background = '#284c32';
 				var start = this.selectionStart;
 				var end = this.selectionEnd;
 
