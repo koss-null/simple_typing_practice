@@ -1,37 +1,37 @@
-let text_to_type;
-let cur_idx;
-let code_with_spaces = !(document.getElementById('use_tabs').checked);
+let textToType;
+let curIdx;
+let codeWithSpaces = !(document.getElementById('use_tabs').checked);
 let hits;
-let max_symbols;
+let maxSymbols;
 let fails;
-let let_errors = false;
+let letErrors = false;
 let startTime;
 let endTime = "lol";
 
 function changeUseTabs() {
-  code_with_spaces = !(document.getElementById('use_tabs').checked);
-  if (!code_with_spaces) {
+  codeWithSpaces = !(document.getElementById('use_tabs').checked);
+  if (!codeWithSpaces) {
     document.getElementsByClassName('use_tabs')[0].style.backgroundColor = "#dbd851";
     document.getElementsByClassName('use_tabs')[0].style.color = "#333";
     document.getElementsByName('label_use_tabs')[0].innerHTML = "Using tabs instead of spaces";
-    text_to_type = text_to_type.replace(/    /g, "\t");
+    textToType = textToType.replace(/    /g, "\t");
     restart();
   } else {
     document.getElementsByClassName('use_tabs')[0].style.backgroundColor = "#444";
     document.getElementsByClassName('use_tabs')[0].style.color = "#dbd851";
     document.getElementsByName('label_use_tabs')[0].innerHTML = "Using spaces instead of tabs";
-    text_to_type = text_to_type.replace(/\t/g, "    ");
+    textToType = textToType.replace(/\t/g, "    ");
     restart();
   }
 }
 
 function changeMaxSymbols() {
-  const ms_old = max_symbols;
-  max_symbols = document.getElementById("max_symbols").value;
-  if (max_symbols <= 0) {
-    max_symbols = text_to_type.length - 1;
+  const msOld = maxSymbols;
+  maxSymbols = document.getElementById("max_symbols").value;
+  if (maxSymbols <= 0) {
+    maxSymbols = textToType.length - 1;
   }
-  if (ms_old !== max_symbols) {
+  if (msOld !== maxSymbols) {
     restart();
   }
 }
@@ -43,18 +43,18 @@ function changeCode() {
 
   reader.addEventListener("load", () => {
     document.getElementsByName('main_window_input')[0].value = "";
-    cur_idx = 0;
+    curIdx = 0;
     hits = 0;
     fails = 0;
-    if (code_with_spaces) {
+    if (codeWithSpaces) {
       document.getElementsByName('main_window_text')[0].value = reader.result.replace(/\t/g, "    ");
-      text_to_type = reader.result.replace(/\t/g, "    ");
+      textToType = reader.result.replace(/\t/g, "    ");
     } else {
       document.getElementsByName('main_window_text')[0].value = reader.result.replace(/    /g, "\t");
-      text_to_type = reader.result.replace(/    /g, "\t");
+      textToType = reader.result.replace(/    /g, "\t");
     }
 
-    document.getElementById("max_symbols").value = text_to_type.length - 1;
+    document.getElementById("max_symbols").value = textToType.length - 1;
 
     const linesCnt = reader.result.split(/\r\n|\r|\n/).length;
     document.getElementsByName('main_window_text')[0].style.minHeight = linesCnt * 27 + "px";
@@ -72,7 +72,7 @@ function restart() {
   hits = 0;
   fails = 0;
   endTime = 'lol';
-  cur_idx = 0;
+  curIdx = 0;
   document.getElementsByName('main_window_input')[0].value = "";
   document.getElementsByClassName('content-front')[0].style.borderBlockColor = '#99974a';
   document.getElementsByClassName('content-front')[0].style.background = '#333';
@@ -88,10 +88,10 @@ $("textarea").keydown(function(e) {
   endTime = performance.now();
   document.getElementById("score").style.color = "#dbd851";
   if (e.code === "Backspace") {
-    cur_idx -= 1;
+    curIdx -= 1;
     hits -= 1;
-    if (cur_idx < 0) {
-      cur_idx = 0;
+    if (curIdx < 0) {
+      curIdx = 0;
       startTime = performance.now();
       endTime = "lol";
     }
@@ -101,15 +101,15 @@ $("textarea").keydown(function(e) {
     console.log("backspace; hits: ", hits);
   } else {
     const typed = e.key;
-    console.log("cur idx ", cur_idx, " val: ", typed);
-    if (typed === text_to_type[cur_idx]) {
-      console.log("got ", typed, " AS expected ", text_to_type[cur_idx]);
+    console.log("cur idx ", curIdx, " val: ", typed);
+    if (typed === textToType[curIdx]) {
+      console.log("got ", typed, " AS expected ", textToType[curIdx]);
       hits += 1;
-      cur_idx += 1;
+      curIdx += 1;
     } else if (typed === "Shift") {
       return;
-    } else if (typed === "Enter" && text_to_type[cur_idx] === "\n") {
-      if (max_symbols <= cur_idx) {
+    } else if (typed === "Enter" && textToType[curIdx] === "\n") {
+      if (maxSymbols <= curIdx) {
         document.getElementById("score").style.color = "#9f6";
         document.getElementsByClassName('content-front')[0].style.borderBlockColor = '#49904e';
         document.getElementsByClassName('content-front')[0].style.background = '#284c32';
@@ -129,11 +129,11 @@ $("textarea").keydown(function(e) {
         e.preventDefault();
       } else {
         hits += 1;
-        cur_idx += 1;
+        curIdx += 1;
       }
     } else if (typed !== "Tab") {
       fails += 1;
-      console.log("got ", typed, " expected ", text_to_type[cur_idx]);
+      console.log("got ", typed, " expected ", textToType[curIdx]);
       // do not enter current symbol
       const start = this.selectionStart;
       const end = this.selectionEnd;
@@ -151,13 +151,13 @@ $("textarea").keydown(function(e) {
       e.preventDefault();
     }
   }
-  console.log(cur_idx, " hits ", hits, " fails ", fails);
+  console.log(curIdx, " hits ", hits, " fails ", fails);
 
   if (e.keyCode === 9) { // tab was pressed
-    let to_add = "";
-    if (text_to_type[cur_idx] === "\t") {
-      cur_idx += 1;
-      to_add = "\t";
+    let toAdd = "";
+    if (textToType[curIdx] === "\t") {
+      curIdx += 1;
+      toAdd = "\t";
     }
     // get caret position/selection
     const start = this.selectionStart;
@@ -167,7 +167,7 @@ $("textarea").keydown(function(e) {
     const value = $this.val();
 
     // set textarea value to: text before caret + tab + text after caret
-    $this.val(value.substring(0, start) + to_add + value.substring(end));
+    $this.val(value.substring(0, start) + toAdd + value.substring(end));
 
     // put caret at right position again (add one for the tab)
     this.selectionStart = this.selectionEnd = start + 1;
@@ -178,8 +178,8 @@ $("textarea").keydown(function(e) {
 
   let suffix = "";
   if (endTime !== "lol") {
-    suffix = `; total time: ${((endTime - startTime) / 1000).toFixed(2)}s,\t${(cur_idx / (endTime - startTime) * 1000 * 60).toFixed(2)} char/min`;
+    suffix = `; total time: ${((endTime - startTime) / 1000).toFixed(2)}s,\t${(curIdx / (endTime - startTime) * 1000 * 60).toFixed(2)} char/min`;
   }
   document.getElementById("score").style.marginTop = "15px";
-  document.getElementById("score").innerHTML = "score: " + cur_idx + "/" + max_symbols + ";\terrors: " + fails + ";\terror rate: " + (fails / hits).toFixed(2) + suffix;
+  document.getElementById("score").innerHTML = "score: " + curIdx + "/" + maxSymbols + ";\terrors: " + fails + ";\terror rate: " + (fails / hits).toFixed(2) + suffix;
 });
