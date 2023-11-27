@@ -1,55 +1,47 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Typing practice v0.1</title>
-    <link rel="stylesheet" type="text/css" href="main.css" media="screen" /> 
+<head>
+  <title>Typing practice v0.1</title>
+  <link rel="stylesheet" type="text/css" href="main.css" media="screen" /> 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="topnav">
+    <a href="#">Typing practice</a>
+    <div id="score"></div>
+  </div>
 
-<!-- Including jQuery  -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous">
-   </script>
-  </head>
-  <body>
-	<div class="topnav">
-	  <a href="#">Typing practice</a>
-	  <div id="score"></div>
-	</div>
+  <div class="content-holder">
+    <div class="settings">
+      <h3>Settings:</h3>
+      <div class="use_tabs">
+        <input type="checkbox" id="use_tabs" onchange="changeUseTabs()" name="use_tabs" style="display: none;" checked>
+        <label for="use_tabs" name="label_use_tabs">Using tabs instead of spaces</label>
+      </div>
+      <div class="max_symbols">
+        Max symbols (set to <= 0 to off):
+        <input type="number" step="1" id="max_symbols" onchange="changeMaxSymbols()" style="width: 90px;"/>
+      </div>
+    </div>
+    <div style="float: left; width: 100%; margin-left: 18px; padding-bottom: 18px">
+      <form action="set_code_file">
+        <input class="code_selector" style="margin-left: 30%; padding-top: 10px" type="file" id="myFile" name="filename" onchange="changeCode()">
+      </form>
+      <button class="code_selector" style="margin-left: 30px" onclick="restart()"><img src="https://cdn4.iconfinder.com/data/icons/game-general-icon-set-1/512/reset-512.png" width="30px" height="30px"></button>
+    </div>
 
-	<div class="content-holder">
-		<div class="settings">
-			<h3>Settings:</h3>
-			<div class="use_tabs">
-				<input type="checkbox" id="use_tabs" onchange="changeUseTabs()" name="use_tabs" style="display: none;" checked>
-				<label for="use_tabs" name="label_use_tabs">Using tabs instead of spaces</label>
-			</div>
-			<div class="max_symbols">
-				Max symbols (set to <= 0 to off):
-				 <input type="number" step="1" id="max_symbols" onchange="changeMaxSymbols()" style="width: 90px;"/>
-			</div>
-		</div>
-		<div style="float: left; width: 100%; margin-left: 18px; padding-bottom: 18px">
-			<form action="set_code_file">
-				<input class="code_selector" style="margin-left: 30%; padding-top: 10px" type="file" id="myFile" name="filename" onchange="changeCode()">
-			</form>
-			<button class="code_selector" style="margin-left: 30px" onclick="restart()"><img
-				src="https://cdn4.iconfinder.com/data/icons/game-general-icon-set-1/512/reset-512.png"
-				width="30px" height="30px"></button>
-		</div>
+    <form action="none" method="get" align="right">
+      <textarea class="content" name="main_window_text"></textarea>
+    </form>
+    <form action="none" method="get" align="right">
+      <textarea class="content-front" name="main_window_input" spellcheck="false"></textarea>
+    </form>
+  </div>
 
-		<form action="none" method="get" align="right">
-			<textarea class="content" name="main_window_text"></textarea>
-		</form>
-		<form action="none" method="get" align="right">
-			<textarea class="content-front" name="main_window_input" spellcheck="false"></textarea>
-		</form>
-		</div>
+  <script src="main.js"></script>
 
- 
-	<script src="main.js"></script>
-
-	<div class="footer">
-	  <p> Nothing in Footer yet</p>
-	</div>
-  </body>
+  <div class="footer">
+    <p>Nothing in Footer yet</p>
+  </div>
+</body>
 </html>
